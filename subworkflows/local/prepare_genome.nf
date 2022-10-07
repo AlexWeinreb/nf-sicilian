@@ -22,14 +22,6 @@ workflow PREPARE_GENOME {
 
     main:
 
-    //
-    // Uncompress genome fasta file if required
-    //
-    if (params.fasta.endsWith('.gz')) {
-        ch_fasta = GUNZIP_FASTA ( params.fasta ).gunzip
-    } else {
-        ch_fasta = file(params.fasta)
-    }
 
     //
     // Uncompress GTF annotation file or create from GFF3 if required
@@ -64,6 +56,16 @@ workflow PREPARE_GENOME {
                 ch_star_index = file(params.star_index)
             }
         } else {
+
+            //
+            // Uncompress genome fasta file if required
+            //
+           if (params.fasta.endsWith('.gz')) {
+                ch_fasta = GUNZIP_FASTA ( params.fasta ).gunzip
+            } else {
+                ch_fasta = file(params.fasta)
+            }
+        
             ch_star_index   = STAR_GENOMEGENERATE ( ch_fasta, ch_gtf ).index
             ch_star_version = STAR_GENOMEGENERATE.out.version
         }
@@ -84,7 +86,7 @@ workflow PREPARE_GENOME {
     }
 
     emit:
-    fasta                 = ch_fasta            // path: genome.fasta
+    //fasta                 = ch_fasta            // path: genome.fasta should NOT be required downstream
     gtf                   = ch_gtf              // path: genome.gtf
     star_index            = ch_star_index       // path: star/index/
     sicilian_annotator    = ch_sicilian_annotator
