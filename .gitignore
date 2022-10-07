@@ -7,6 +7,7 @@ tests/
 testing/
 testing*
 *.pyc
+logs
 
 pipeline_dag*.svg*
 execution_trace*.txt*
