@@ -898,10 +898,10 @@ sicilian_splicing_called_junctions = postprocessing_hardthreshold(GLM_output,cla
 
 
 # use the following function to find inserted/missing domains for each called junction (this function will be run only when ucsc domain annotation files have been provided)
-if ((length(args)==6) | (length(args)==8)){
-  ucsc_domain_file = args[6]
-  sicilian_splicing_called_junctions = domain_annotation(ucsc_domain_file,sicilian_splicing_called_junctions)
-}
+#if ((length(args)==6) | (length(args)==8)){
+#  ucsc_domain_file = args[6]
+#  sicilian_splicing_called_junctions = domain_annotation(ucsc_domain_file,sicilian_splicing_called_junctions)
+#}
 
 
 write.table(sicilian_splicing_called_junctions, paste(directory,"sicilian_called_splice_juncs.tsv", sep = ""), row.names = FALSE, quote = FALSE, sep = "\t")
